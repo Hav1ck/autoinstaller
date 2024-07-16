@@ -2,6 +2,7 @@ import os
 import subprocess
 import re
 import requests
+from zipfile import ZipFile
 from PIL import Image
 import customtkinter as ctk
 
@@ -52,7 +53,7 @@ class downloads:
     @staticmethod
     def start_vscode():
         print("Downloading VSCode...")
-        file_path = downloads.downloading("https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user")
+        file_path = downloads.downloading("https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1e16e1e6214d7c44d078b1f0607b2388f29d729/VSCodeUserSetup-x64-1.91.1.exe")
         downloads.open_file(file_path)
 
     @staticmethod
@@ -64,8 +65,13 @@ class downloads:
     @staticmethod
     def start_filterkeysetter():
         print("Downloading FilterKeySetter...")
-        file_path = downloads.downloading("https://geekhack.org/index.php?PHPSESSID=vnbcrahe1otq94b8sf1438gvgb1ebef7&action=dlattach;topic=41881.0;attach=17473")
-        downloads.open_file(file_path)
+        zip_path = downloads.downloading("https://wintools.b-cdn.net/FilterKeysSetter_1.0.zip")
+        
+        with ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall("downloads/filterkeysetter")
+
+        exe_path = os.path.join("downloads", "filterkeysetter", "FilterKeysSetter.exe")
+        downloads.open_file(exe_path)
 
     @staticmethod
     def start_rainmeter():
