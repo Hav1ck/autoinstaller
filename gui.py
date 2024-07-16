@@ -84,7 +84,7 @@ class downloads:
     @staticmethod
     def start_chrome():
         print("Downloading Google Chrome...")
-        file_path = downloads.downloading("https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D&iid%3D%7B45542E4C-DFAE-51A1-38F1-1F83E38E3C27%7D&lang%3Den&browser%3D4&usagestats%3D0&appname%3DChrome&needsadmin%3Dprefers/dl/chrome/install/googlechromestandaloneenterprise64.msi")
+        file_path = downloads.downloading("https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BD5F8B792-08D2-82D2-1316-2F4322602E09%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe")
         downloads.open_file(file_path)
 
     @staticmethod
@@ -158,8 +158,11 @@ class gui:
         root.attributes('-fullscreen', True)
         root.title("Installer")
 
-        frame = ctk.CTkFrame(root)
-        frame.pack(side="top", fill='x', pady=20)
+        frame1 = ctk.CTkFrame(root)
+        frame1.pack(side="top", fill='x', pady=20)
+
+        frame2 = ctk.CTkFrame(root)
+        frame2.pack(side="top", fill='x', pady=20)
 
         brave_image = gui.image_resize((50, 50), "icons/brave_icon.png")
         vscode_image = gui.image_resize((50, 50), "icons/vscode_icon.png")
@@ -178,7 +181,7 @@ class gui:
         obs_image = gui.image_resize((50, 50), "icons/obs_icon.png")
 
         brave_button = ctk.CTkButton(
-            frame,
+            frame1,  
             text="Brave",
             command=downloads.start_brave,
             image=brave_image,
@@ -187,7 +190,7 @@ class gui:
         )
 
         vscode_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="VSCode",
             command=downloads.start_vscode,
             image=vscode_image,
@@ -196,7 +199,7 @@ class gui:
         )
 
         zip_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="7-Zip",
             command=downloads.start_7zip,
             image=zip_image,
@@ -205,7 +208,7 @@ class gui:
         )
 
         filterkeysetter_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="Keysetter",
             command=downloads.start_filterkeysetter,
             image=filterkeysetter_image,
@@ -214,7 +217,7 @@ class gui:
         )
 
         rainmeter_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="Rainmeter",
             command=downloads.start_rainmeter,
             image=rainmeter_image,
@@ -223,7 +226,7 @@ class gui:
         )
 
         chrome_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="Chrome",
             command=downloads.start_chrome,
             image=chrome_image,
@@ -232,7 +235,7 @@ class gui:
         )
 
         notepadpp_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="Notepad++",
             command=downloads.start_notepadpp,
             image=notepadpp_image,
@@ -241,7 +244,7 @@ class gui:
         )
 
         gimp_button = ctk.CTkButton(
-            frame,
+            frame1,
             text="GIMP",
             command=downloads.start_gimp,
             image=gimp_image,
@@ -250,7 +253,7 @@ class gui:
         )
 
         git_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Git",
             command=downloads.start_git,
             image=git_image,
@@ -259,7 +262,7 @@ class gui:
         )
 
         docker_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Docker",
             command=downloads.start_docker,
             image=docker_image,
@@ -268,7 +271,7 @@ class gui:
         )
 
         slack_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Slack",
             command=downloads.start_slack,
             image=slack_image,
@@ -277,7 +280,7 @@ class gui:
         )
 
         spotify_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Spotify",
             command=downloads.start_spotify,
             image=spotify_image,
@@ -286,7 +289,7 @@ class gui:
         )
 
         python_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Python",
             command=downloads.start_python,
             image=python_image,
@@ -295,7 +298,7 @@ class gui:
         )
 
         nodejs_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="Node.js",
             command=downloads.start_nodejs,
             image=nodejs_image,
@@ -304,7 +307,7 @@ class gui:
         )
 
         obs_button = ctk.CTkButton(
-            frame,
+            frame2,
             text="OBS",
             command=downloads.start_obs,
             image=obs_image,
@@ -320,6 +323,7 @@ class gui:
         chrome_button.pack(padx=20, pady=20, side="left")
         notepadpp_button.pack(padx=20, pady=20, side="left")
         gimp_button.pack(padx=20, pady=20, side="left")
+
         git_button.pack(padx=20, pady=20, side="left")
         docker_button.pack(padx=20, pady=20, side="left")
         slack_button.pack(padx=20, pady=20, side="left")
@@ -330,5 +334,14 @@ class gui:
 
         root.mainloop()
 
+
 if __name__ == "__main__":
     gui.gui()
+
+
+#obs ?
+# node js msi   
+# slack corrupted
+# docker takes long
+# gimp corrupted
+# notepad ++ requires elevation
