@@ -46,7 +46,7 @@ class downloads:
     @staticmethod
     def start_brave():
         print("Downloading Brave...")
-        file_path = downloads.downloading("https://laptop-updates.brave.com/download/BRV010?bitness=64")
+        file_path = downloads.downloading("https://github.com/brave/brave-browser/releases/download/v0.59.35/BraveBrowserSetup32.exe")
         downloads.open_file(file_path)
 
     @staticmethod
