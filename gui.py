@@ -35,10 +35,13 @@ class downloads:
         return vbs_path
 
     @staticmethod
-    def open_file(file_path):
+    def open_file(file_path, admin=False):
         try:
-            vbs_path = downloads.create_vbs_script(file_path)
-            subprocess.run(["wscript", vbs_path], check=True)
+            if admin:
+                vbs_path = downloads.create_vbs_script(file_path)
+                subprocess.run(["wscript", vbs_path], check=True)
+            else:
+                subprocess.run([file_path], check=True)
         except subprocess.CalledProcessError as e:
             print(f"Error opening file {file_path}: {e}")
         except Exception as e:
@@ -60,7 +63,7 @@ class downloads:
     def start_7zip():
         print("Downloading 7-Zip...")
         file_path = downloads.downloading("https://www.7-zip.org/a/7z2407-x64.exe")
-        downloads.open_file(file_path)
+        downloads.open_file(file_path, admin=True)
 
     @staticmethod
     def start_filterkeysetter():
