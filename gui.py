@@ -1,3 +1,9 @@
+import os
+import subprocess
+import re
+import requests
+import threading
+from zipfile import ZipFile
 import customtkinter as ctk
 from PIL import Image
 from downloads import Downloads
@@ -27,6 +33,8 @@ class GUI:
         progress_bar.pack(fill='x', padx=20, pady=10)
         progress_bar.set(0)
 
+        # Pass the root and progress_bar to the Downloads class
+        Downloads.root = root
         Downloads.progress_bar = progress_bar
 
         brave_image = Utils.image_resize((50, 50), "icons/brave_icon.png")
@@ -48,7 +56,7 @@ class GUI:
         brave_button = ctk.CTkButton(
             frame1,  
             text="Brave",
-            command=Downloads.start_brave,
+            command=lambda: threading.Thread(target=Downloads.start_brave).start(),
             image=brave_image,
             compound="top",
             font=("Arial", 16, "bold"),
@@ -57,7 +65,7 @@ class GUI:
         vscode_button = ctk.CTkButton(
             frame1,
             text="VSCode",
-            command=Downloads.start_vscode,
+            command=lambda: threading.Thread(target=Downloads.start_vscode).start(),
             image=vscode_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -66,7 +74,7 @@ class GUI:
         zip_button = ctk.CTkButton(
             frame1,
             text="7-Zip",
-            command=Downloads.start_7zip,
+            command=lambda: threading.Thread(target=Downloads.start_7zip).start(),
             image=zip_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -75,7 +83,7 @@ class GUI:
         filterkeysetter_button = ctk.CTkButton(
             frame1,
             text="Keysetter",
-            command=Downloads.start_filterkeysetter,
+            command=lambda: threading.Thread(target=Downloads.start_filterkeysetter).start(),
             image=filterkeysetter_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -84,7 +92,7 @@ class GUI:
         rainmeter_button = ctk.CTkButton(
             frame1,
             text="Rainmeter",
-            command=Downloads.start_rainmeter,
+            command=lambda: threading.Thread(target=Downloads.start_rainmeter).start(),
             image=rainmeter_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -93,7 +101,7 @@ class GUI:
         chrome_button = ctk.CTkButton(
             frame1,
             text="Chrome",
-            command=Downloads.start_chrome,
+            command=lambda: threading.Thread(target=Downloads.start_chrome).start(),
             image=chrome_image,
             compound="top",
             font=("Arial", 16, "bold"),
@@ -102,7 +110,7 @@ class GUI:
         notepadpp_button = ctk.CTkButton(
             frame1,
             text="Notepad++",
-            command=Downloads.start_notepadpp,
+            command=lambda: threading.Thread(target=Downloads.start_notepadpp).start(),
             image=notepadpp_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -111,7 +119,7 @@ class GUI:
         gimp_button = ctk.CTkButton(
             frame1,
             text="GIMP",
-            command=Downloads.start_gimp,
+            command=lambda: threading.Thread(target=Downloads.start_gimp).start(),
             image=gimp_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -120,7 +128,7 @@ class GUI:
         git_button = ctk.CTkButton(
             frame2,
             text="Git",
-            command=Downloads.start_git,
+            command=lambda: threading.Thread(target=Downloads.start_git).start(),
             image=git_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -129,7 +137,7 @@ class GUI:
         docker_button = ctk.CTkButton(
             frame2,
             text="Docker",
-            command=Downloads.start_docker,
+            command=lambda: threading.Thread(target=Downloads.start_docker).start(),
             image=docker_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -138,7 +146,7 @@ class GUI:
         slack_button = ctk.CTkButton(
             frame2,
             text="Slack",
-            command=Downloads.start_slack,
+            command=lambda: threading.Thread(target=Downloads.start_slack).start(),
             image=slack_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -147,7 +155,7 @@ class GUI:
         spotify_button = ctk.CTkButton(
             frame2,
             text="Spotify",
-            command=Downloads.start_spotify,
+            command=lambda: threading.Thread(target=Downloads.start_spotify).start(),
             image=spotify_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -156,7 +164,7 @@ class GUI:
         python_button = ctk.CTkButton(
             frame2,
             text="Python",
-            command=Downloads.start_python,
+            command=lambda: threading.Thread(target=Downloads.start_python).start(),
             image=python_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -165,7 +173,7 @@ class GUI:
         nodejs_button = ctk.CTkButton(
             frame2,
             text="Node.js",
-            command=Downloads.start_nodejs,
+            command=lambda: threading.Thread(target=Downloads.start_nodejs).start(),
             image=nodejs_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -174,7 +182,7 @@ class GUI:
         obs_button = ctk.CTkButton(
             frame2,
             text="OBS",
-            command=Downloads.start_obs,
+            command=lambda: threading.Thread(target=Downloads.start_obs).start(),
             image=obs_image,
             compound="top",
             font=("Arial", 16, "bold")
@@ -198,3 +206,4 @@ class GUI:
         obs_button.pack(padx=20, pady=20, side="left")
 
         root.mainloop()
+        
