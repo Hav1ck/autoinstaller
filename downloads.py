@@ -5,20 +5,33 @@ import requests
 from zipfile import ZipFile
 
 class Downloads:
+    progress_bar = None
+
     @staticmethod
     def downloading(URL):
         try:
-            response = requests.get(URL)
+            response = requests.get(URL, stream=True)
+            total_length = response.headers.get('content-length')
+
+            if total_length is None:  # no content
+                return None
+
             filename = URL.split("/")[-1]
             filename = re.sub(r'[^\w\-_\. ]', '_', filename)
-            
+
             if not os.path.exists('downloads'):
                 os.makedirs('downloads')
-            
+
             file_path = os.path.join('downloads', filename)
-            
+            total_length = int(total_length)
+
             with open(file_path, "wb") as file:
-                file.write(response.content)
+                dl = 0
+                for data in response.iter_content(chunk_size=4096):
+                    dl += len(data)
+                    file.write(data)
+                    if Downloads.progress_bar:
+                        Downloads.progress_bar.set(dl / total_length)
             return file_path
         except Exception as e:
             print(f"Error downloading {URL}: {e}")
@@ -86,7 +99,7 @@ class Downloads:
     def start_filterkeysetter():
         print("Downloading FilterKeySetter...")
         zip_path = Downloads.downloading("https://wintools.b-cdn.net/FilterKeysSetter_1.0.zip")
-        
+
         if zip_path:
             try:
                 with ZipFile(zip_path, 'r') as zip_ref:

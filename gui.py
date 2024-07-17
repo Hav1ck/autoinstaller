@@ -20,6 +20,15 @@ class GUI:
         frame2 = ctk.CTkFrame(root)
         frame2.pack(side="top", fill='x', pady=20)
 
+        progress_label = ctk.CTkLabel(root, text="Download Progress:")
+        progress_label.pack(pady=10)
+
+        progress_bar = ctk.CTkProgressBar(root)
+        progress_bar.pack(fill='x', padx=20, pady=10)
+        progress_bar.set(0)
+
+        Downloads.progress_bar = progress_bar
+
         brave_image = Utils.image_resize((50, 50), "icons/brave_icon.png")
         vscode_image = Utils.image_resize((50, 50), "icons/vscode_icon.png")
         zip_image = Utils.image_resize((50, 50), "icons/7zip_icon.png")
